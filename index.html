@@ -47,9 +47,19 @@ button {
 <div class="card">
 <h2>Benvenuto!</h2>
 <p>Il tuo nuovo spazio social inizia qui.</p>
-<button onclick="alert('Benvenuto su Social Mirror!')">
-Inizia
+<button onclick="document.getElementById('registrazione').style.display='block'">
+  Inizia
 </button>
+
+<div id="registrazione" style="display:none; padding:20px;">
+  <h2>Crea il tuo profilo</h2>
+  <input type="text" placeholder="Il tuo nome">
+  <input type="email" placeholder="La tua email">
+  <input type="password" placeholder="Crea una password">
+  <button onclick="alert('Registrazione in preparazione!')">
+    Registrati
+  </button>
+</div>
 </div>
 </main>
 <script>
