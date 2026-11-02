@@ -52,5 +52,19 @@ Inizia
 </button>
 </div>
 </main>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      const output = document.getElementById("result");
+      if (output) {
+        output.textContent = "Social Mirror è attivo! Funzione in preparazione.";
+      } else {
+        alert("Social Mirror è attivo!");
+      }
+    });
+  });
+});
+</script>
 </body>
 </html>
