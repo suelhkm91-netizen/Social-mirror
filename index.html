@@ -51,14 +51,40 @@ button {
   Inizia
 </button>
 
-<div id="registrazione" style="display:none; padding:20px;">
+<div<div id="registrazione" style="display:none; padding:20px;">
   <h2>Crea il tuo profilo</h2>
-  <input type="text" placeholder="Il tuo nome">
-  <input type="email" placeholder="La tua email">
-  <input type="password" placeholder="Crea una password">
-  
-<button 
-  Certo. Eccola, pronta da copiare: <button type="button" onclick="document.getElementById('registrazione').style.display='block'">.
+  <p>Inizia il tuo nuovo spazio social!</p>
+
+  <input
+    type="text"
+    id="smName"
+    placeholder="Il tuo nome"
+    required
+  >
+
+  <input
+    type="email"
+    id="smEmail"
+    placeholder="La tua email"
+    required
+  >
+
+  <input
+    type="password"
+    id="smPassword"
+    placeholder="Crea una password"
+    required
+  >
+
+  <button type="button" id="smRegister">
+    Crea account
+  </button>
+
+  <button type="button" id="smGoogle">
+    Continua con Google
+  </button>
+
+  <p id="authStatus"></p>
 </div>
 </div>
 </main>
