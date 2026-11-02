@@ -1,0 +1,10 @@
+{
+  "name": "Social Mirror",
+  "short_name": "SocialMirror",
+  "description": "La tua identità digitale",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f3f7fc",
+  "theme_color": "#1769aa",
+  "orientation": "portrait"
+}
