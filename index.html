@@ -76,5 +76,172 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+  
+<style>
+#myMirror {
+  background: white;
+  color: #183b65;
+  border: 1px solid #d7e5f5;
+  border-radius: 16px;
+  padding: 18px;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+#myMirror input, #myMirror select {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin: 8px 0 16px;
+  border: 1px solid #cbd8e8;
+  border-radius: 9px;
+}
+#myMirror button {
+  padding: 12px;
+  border: 0;
+  border-radius: 9px;
+  background: #1769c2;
+  color: white;
+  margin: 5px 3px;
+}
+#myMirror .avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: #dcecff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 22px;
+}
+#myMirror .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+</style>
+
+<section id="myMirror">
+  <h2>MY MIRROR</h2>
+  <p>Personalizza un contatto. Solo tu vedrai le modifiche.</p>
+
+  <div class="avatar">
+    <span id="smInitials">EL</span>
+    <img id="smPhotoPreview" alt="Foto personalizzata" hidden>
+  </div>
+
+  <p>Contatto originale: <strong>Elena</strong></p>
+  <p>Nome che vedrai tu:</p>
+  <input id="smAlias" placeholder="Es. Alessandro">
+
+  <label>La tua foto personalizzata</label>
+  <input id="smPhoto" type="file" accept="image/*">
+
+  <label>Dove vuoi applicare la personalizzazione?</label>
+  <select id="smScope">
+    <option value="chat">Solo nella chat</option>
+    <option value="nearby">Nelle persone vicine</option>
+    <option value="both">In entrambe</option>
+  </select>
+
+  <button type="button" id="smSave">Salva modifiche</button>
+  <button type="button" id="smReset">Ripristina originale</button>
+
+  <p id="smStatus" aria-live="polite"></p>
+</section>
+
+<script>
+(function () {
+  const key = "socialMirrorPrivateElena";
+  const alias = document.getElementById("smAlias");
+  const photoInput = document.getElementById("smPhoto");
+  const scope = document.getElementById("smScope");
+  const preview = document.getElementById("smPhotoPreview");
+  const initials = document.getElementById("smInitials");
+  const status = document.getElementById("smStatus");
+
+  let saved = {};
+  let newPhoto = null;
+
+  try {
+    saved = JSON.parse(localStorage.getItem(key)) || {};
+  } catch (e) {
+    saved = {};
+  }
+
+  function show() {
+    alias.value = saved.alias || "";
+    scope.value = saved.scope || "chat";
+
+    initials.textContent =
+      (saved.alias || "Elena").substring(0, 2).toUpperCase();
+
+    if (saved.photo) {
+      preview.src = saved.photo;
+      preview.hidden = false;
+      initials.hidden = true;
+    } else {
+      preview.hidden = true;
+      initials.hidden = false;
+    }
+  }
+
+  photoInput.addEventListener("change", function () {
+    const file = photoInput.files[0];
+    if (!file) return;
+
+    if (file.size > 1500000) {
+      status.textContent = "Scegli una foto più piccola di 1,5 MB.";
+      photoInput.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      newPhoto = reader.result;
+      preview.src = newPhoto;
+      preview.hidden = false;
+      initials.hidden = true;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  document.getElementById("smSave").addEventListener("click", function () {
+    const name = alias.value.trim();
+
+    if (!name) {
+      status.textContent = "Inserisci un nome personalizzato.";
+      return;
+    }
+
+    const updated = {
+      alias: name,
+      scope: scope.value,
+      photo: newPhoto || saved.photo || ""
+    };
+
+    try {
+      localStorage.setItem(key, JSON.stringify(updated));
+      saved = updated;
+      show();
+      status.textContent = "Personalizzazione salvata sul tuo dispositivo!";
+    } catch (e) {
+      status.textContent = "Spazio di memoria insufficiente. Prova con una foto più piccola.";
+    }
+  });
+
+  document.getElementById("smReset").addEventListener("click", function () {
+    localStorage.removeItem(key);
+    saved = {};
+    newPhoto = null;
+    photoInput.value = "";
+    show();
+    status.textContent = "Ripristinato il contatto originale Elena.";
+  });
+
+  show();
+})();
+</script>
 </body>
 </html>
