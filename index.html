@@ -3,108 +3,127 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#e9e5d8">
 <title>Social Mirror</title>
 
 <style>
 :root {
-  --cream: #f5f1e7;
-  --sage: #9caf98;
-  --forest: #385343;
+  --sage: #829783;
+  --cream: #f8f5ed;
   --gold: #c6a45b;
+  --dark: #35483a;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: var(--cream);
-  color: var(--forest);
+  color: var(--dark);
 }
 
 header {
-  background: var(--forest);
+  background: var(--sage);
   color: white;
   text-align: center;
-  padding: 22px;
+  padding: 24px 12px;
 }
 
 header h1 {
   margin: 0;
-  font-size: 27px;
-  letter-spacing: 2px;
+  font-size: 30px;
 }
 
-header p {
-  margin-bottom: 0;
-  color: #e5d5a8;
-}
-
-main {
+.container {
   max-width: 650px;
-  margin: auto;
-  padding: 18px;
+  margin: 20px auto;
+  padding: 12px;
 }
 
 .card {
   background: white;
-  border-radius: 18px;
   padding: 20px;
-  margin-bottom: 18px;
-  box-shadow: 0 3px 12px #0000000d;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 3px 12px #00000012;
 }
 
-h2 { color: var(--forest); }
+h2 {
+  color: var(--dark);
+}
 
-input {
+input, textarea, select {
   width: 100%;
   padding: 13px;
   margin: 7px 0;
-  border: 1px solid #d8dfd4;
-  border-radius: 10px;
+  border: 1px solid #ddd;
+  border-radius: 9px;
   font-size: 15px;
+  background: white;
+}
+
+textarea {
+  min-height: 75px;
+  resize: vertical;
 }
 
 button {
   background: var(--sage);
   color: white;
   border: none;
-  padding: 13px 18px;
+  padding: 13px 17px;
   border-radius: 10px;
-  margin: 5px 3px;
-  font-size: 15px;
   cursor: pointer;
+  font-size: 15px;
+  margin: 5px 0;
 }
-
-button:hover { background: var(--forest); }
 
 .gold {
   background: var(--gold);
-  color: #273b2e;
+  color: #29251c;
 }
 
 .secondary {
-  background: #e9e5d8;
-  color: var(--forest);
+  background: #e8e8e0;
+  color: var(--dark);
 }
 
-.hidden { display: none !important; }
+.hidden {
+  display: none !important;
+}
 
-.user {
-  padding: 12px;
-  margin: 7px 0;
-  background: var(--cream);
-  border-radius: 10px;
+.status {
+  color: #a13c32;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.person {
+  border: 1px solid #e5e5dc;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 12px 0;
+}
+
+.person h3 {
+  margin-top: 0;
+}
+
+.affinity {
+  color: #9b7835;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 #messages {
-  height: 250px;
+  height: 260px;
   overflow-y: auto;
   background: var(--cream);
+  border-radius: 10px;
   padding: 12px;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  margin: 12px 0;
 }
 
 .message {
@@ -115,19 +134,14 @@ button:hover { background: var(--forest); }
   overflow-wrap: anywhere;
 }
 
-.mine { background: #dce8d9; }
-
-#status {
-  font-size: 14px;
-  color: var(--forest);
-  margin: 10px 0;
+.my-message {
+  background: #e1ebdf;
 }
 
 footer {
   text-align: center;
   padding: 20px;
-  color: #777;
-  font-size: 12px;
+  font-size: 13px;
 }
 </style>
 </head>
@@ -135,92 +149,132 @@ footer {
 <body>
 
 <header>
-  <h1>🌿 SOCIAL MIRROR</h1>
-  <p>Incontra. Condividi. Comunica.</p>
+  <h1>🌿 Social Mirror</h1>
+  <p>Incontra chi ti somiglia</p>
+  <p>Musica · Cinema · Amicizia · Incontri</p>
 </header>
 
-<main>
+<div class="container">
 
-<section id="welcome" class="card">
-  <h2>Benvenuto su Social Mirror</h2>
-  <p>Uno spazio per conoscere nuove persone e comunicare in privato.</p>
-  <button onclick="showAuth()">Entra</button>
-</section>
+  <section class="card" id="welcome">
+    <h2>Benvenuto su Social Mirror ❤️</h2>
+    <p>Trova persone che condividono le tue passioni.</p>
+    <button onclick="showAuth()">Entra</button>
+  </section>
 
-<section id="auth" class="card hidden">
-  <h2>Il tuo account</h2>
+  <section class="card hidden" id="authCard">
+    <h2>Crea il tuo account</h2>
 
-  <input id="name" placeholder="Il tuo nome">
-  <input id="email" type="email" placeholder="La tua email">
-  <input id="password" type="password" placeholder="Password">
+    <input id="displayName" placeholder="Il tuo nome">
+    <input id="email" type="email" placeholder="La tua email">
+    <input id="password" type="password" placeholder="Password">
 
-  <button onclick="register()">Crea account</button>
-  <button onclick="login()">Accedi</button>
-  <button class="gold" onclick="googleLogin()">
-    Continua con Google
-  </button>
-</section>
+    <button onclick="register()">Crea account</button>
+    <button class="secondary" onclick="login()">Accedi</button>
+    <button class="gold" onclick="googleLogin()">Continua con Google</button>
+    <button class="secondary" onclick="showWelcome()">Indietro</button>
 
-<section id="dashboard" class="hidden">
+    <p id="authStatus" class="status"></p>
+  </section>
 
-  <div class="card">
-    <h2>Il mio profilo</h2>
-    <p id="welcomeUser"></p>
-    <button class="secondary" onclick="logout()">Esci</button>
-  </div>
+  <section id="dashboard" class="hidden">
 
-  <div class="card">
-    <h2>💬 Persone su Social Mirror</h2>
-    <p>Scegli una persona per iniziare una chat privata.</p>
-    <div id="usersList">Caricamento utenti...</div>
-  </div>
+    <div class="card">
+      <h2>👤 Il mio profilo</h2>
+      <p id="profileInfo"></p>
 
-  <div class="card hidden" id="chatCard">
-    <h2 id="chatTitle">Chat privata</h2>
+      <input id="profileName" placeholder="Come vuoi essere chiamato?">
 
-    <div id="messages"></div>
+      <label>La tua nazione</label>
+      <input id="country" placeholder="Es. Italia, America, Australia">
 
-    <input id="messageInput"
-           placeholder="Scrivi un messaggio...">
+      <label>La tua città</label>
+      <input id="city" placeholder="Es. Milano, Roma, Sydney">
 
-    <button onclick="sendMessage()">Invia</button>
-    <button class="secondary" onclick="closeChat()">Chiudi chat</button>
+      <label>Musica e cantanti preferiti</label>
+      <textarea id="music" placeholder="Es. Pop, Rock, Vasco Rossi, Laura Pausini"></textarea>
 
-    <hr>
+      <label>Film, serie TV e generi preferiti</label>
+      <textarea id="movies" placeholder="Es. Azione, Commedia, Titanic, Netflix..."></textarea>
 
-    <h3>🎁 Regala qualcosa</h3>
+      <button onclick="saveProfile()">Salva il mio profilo</button>
+      <p id="profileStatus" class="status"></p>
+      <button class="secondary" onclick="logout()">Esci</button>
+    </div>
 
-    <button class="gold" onclick="sendGift('🌹 Rosa')">🌹 Rosa</button>
-    <button class="gold" onclick="sendGift('❤️ Cuore')">❤️ Cuore</button>
-    <button class="gold" onclick="sendGift('💎 Diamante')">💎 Diamante</button>
-    <button class="gold" onclick="sendGift('💍 Gioiello')">💍 Gioiello</button>
-  </div>
+    <div class="card">
+      <h2>❤️ Trova la tua sintonia</h2>
 
-  <div class="card">
-    <h2>⭐ Social Mirror VIP</h2>
-    <p>Un'area dedicata alle future funzionalità esclusive.</p>
-    <button class="gold" onclick="vipInfo()">Scopri VIP</button>
-  </div>
+      <p>
+        Cerca persone in base alle tue passioni,
+        alla città o alla nazione che preferisci.
+      </p>
 
-  <div class="card">
-    <h2>💰 Sistema regali e pagamenti</h2>
-    <p>
-      In futuro sarà possibile integrare pagamenti reali,
-      invio di denaro e commissioni della piattaforma.
-    </p>
-    <p><strong>Pagamenti reali non ancora attivi.</strong></p>
-  </div>
+      <input id="searchCountry" placeholder="Cerca una nazione">
+      <input id="searchCity" placeholder="Cerca una città">
 
-</section>
+      <button onclick="loadUsers()">Cerca persone</button>
+      <button class="secondary" onclick="clearSearch()">Mostra tutti</button>
 
-<p id="status"></p>
+      <p id="usersStatus" class="status"></p>
+      <div id="usersList">Caricamento persone...</div>
+    </div>
 
-</main>
+    <div class="card hidden" id="chatCard">
+      <h2 id="chatTitle">Chat privata</h2>
+
+      <div id="messages"></div>
+
+      <input id="messageInput" placeholder="Scrivi un messaggio...">
+
+      <button onclick="sendMessage()">Invia</button>
+      <button class="secondary" onclick="closeChat()">Chiudi chat</button>
+
+      <p id="chatStatus" class="status"></p>
+    </div>
+
+    <div class="card">
+      <h2>🎁 Regali virtuali</h2>
+      <p>Puoi inviare regali alla persona con cui stai chattando.</p>
+
+      <button onclick="sendGift('🌹 Rosa')">🌹 Rosa</button>
+      <button onclick="sendGift('❤️ Cuore')">❤️ Cuore</button>
+      <button onclick="sendGift('💎 Diamante')">💎 Diamante</button>
+    </div>
+
+    <div class="card">
+      <h2>⭐ Social Mirror VIP</h2>
+      <p>Funzionalità esclusive in arrivo.</p>
+      <button class="gold" onclick="vipInfo()">Scopri VIP</button>
+    </div>
+
+    <div class="card">
+      <h2>📍 Distanza e GPS</h2>
+      <p>
+        Potrai scegliere se cercare persone vicino a te
+        oppure in qualsiasi città o nazione.
+      </p>
+      <p>
+        Il GPS sarà facoltativo e richiederà il consenso.
+        La distanza in chilometri verrà attivata
+        dopo aver configurato il servizio sicuro.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>💳 Pagamenti</h2>
+      <p>
+        I pagamenti reali non sono ancora attivi.
+        Saranno integrati successivamente con un servizio autorizzato.
+      </p>
+    </div>
+
+  </section>
+
+</div>
 
 <footer>
   Social Mirror © 2026
-  <br>
-  Rispetta sempre la privacy degli altri utenti.
 </footer>
 
 <script type="module">
@@ -234,24 +288,26 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  updateProfile,
   onAuthStateChanged,
-  signOut
+  signOut,
+  updateProfile
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
 import {
   getFirestore,
+  collection,
   doc,
   setDoc,
-  getDoc,
-  collection,
+  getDocs,
   addDoc,
-  query,
-  orderBy,
   onSnapshot,
-  serverTimestamp
+  serverTimestamp,
+  query,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
+
+/* FIREBASE */
 
 const firebaseConfig = {
   apiKey: "AIzaSyCJDgEfbZMOZE4tvkLNKG82EvOx7rIe3Ew",
@@ -266,44 +322,62 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 
 let currentUser = null;
-let activeChatId = null;
+let currentChatId = null;
 let unsubscribeMessages = null;
-let unsubscribeUsers = null;
 
-const $ = id => document.getElementById(id);
 
-function status(message) {
-  $("status").textContent = message;
-}
+/* NAVIGAZIONE */
 
 function showAuth() {
-  $("welcome").classList.add("hidden");
-  $("auth").classList.remove("hidden");
+  welcome.classList.add("hidden");
+  authCard.classList.remove("hidden");
 }
 
-async function saveUser(user, name) {
-  await setDoc(doc(db, "users", user.uid), {
-    uid: user.uid,
-    name: name || user.displayName || "Utente",
-    email: user.email || "",
-    updatedAt: serverTimestamp()
-  }, { merge: true });
+function showWelcome() {
+  authCard.classList.add("hidden");
+  welcome.classList.remove("hidden");
 }
+
+function showDashboard() {
+  welcome.classList.add("hidden");
+  authCard.classList.add("hidden");
+  dashboard.classList.remove("hidden");
+}
+
+
+/* ELEMENTI PRINCIPALI */
+
+const welcome = document.getElementById("welcome");
+const authCard = document.getElementById("authCard");
+const dashboard = document.getElementById("dashboard");
+
+
+/* REGISTRAZIONE */
 
 async function register() {
-  const name = $("name").value.trim();
-  const email = $("email").value.trim();
-  const password = $("password").value;
 
-  if (!name || !email || password.length < 6) {
-    status("Inserisci nome, email e password di almeno 6 caratteri.");
+  const name = document.getElementById("displayName").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  const status = document.getElementById("authStatus");
+
+  if (!name || !email || !password) {
+    status.textContent = "Inserisci nome, email e password.";
+    return;
+  }
+
+  if (password.length < 6) {
+    status.textContent = "La password deve avere almeno 6 caratteri.";
     return;
   }
 
   try {
+    status.textContent = "Creazione account...";
+
     const result = await createUserWithEmailAndPassword(
       auth, email, password
     );
@@ -312,238 +386,556 @@ async function register() {
       displayName: name
     });
 
-    await saveUser(result.user, name);
-    status("Account creato correttamente!");
+    await createProfile(result.user, name);
 
+    status.textContent = "Account creato!";
   } catch (error) {
-    status(error.message);
+    status.textContent = "Errore: " + error.message;
   }
 }
+
+
+/* ACCESSO */
 
 async function login() {
-  const email = $("email").value.trim();
-  const password = $("password").value;
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const status = document.getElementById("authStatus");
+
+  if (!email || !password) {
+    status.textContent = "Inserisci email e password.";
+    return;
+  }
 
   try {
+    status.textContent = "Accesso in corso...";
+
     await signInWithEmailAndPassword(auth, email, password);
-    status("Accesso effettuato!");
+
   } catch (error) {
-    status(error.message);
+    status.textContent = "Errore: " + error.message;
   }
 }
+
+
+/* GOOGLE */
 
 async function googleLogin() {
+
   try {
-    const result = await signInWithPopup(auth, provider);
-    await saveUser(result.user);
-    status("Accesso Google effettuato!");
+    const result = await signInWithPopup(auth, googleProvider);
+    await createProfile(result.user, result.user.displayName || "");
   } catch (error) {
-    status(error.message);
+    document.getElementById("authStatus").textContent =
+      "Errore Google: " + error.message;
   }
 }
 
-async function logout() {
+
+/* CREAZIONE PROFILO */
+
+async function createProfile(user, name) {
+
+  const reference = doc(db, "users", user.uid);
+
+  await setDoc(reference, {
+    uid: user.uid,
+    displayName: name || user.email.split("@")[0],
+    country: "",
+    city: "",
+    music: "",
+    movies: "",
+    createdAt: serverTimestamp()
+  }, { merge: true });
+
+}
+
+
+/* SALVATAGGIO PROFILO */
+
+async function saveProfile() {
+
+  if (!currentUser) return;
+
+  const name = document.getElementById("profileName").value.trim();
+  const country = document.getElementById("country").value.trim();
+  const city = document.getElementById("city").value.trim();
+  const music = document.getElementById("music").value.trim();
+  const movies = document.getElementById("movies").value.trim();
+
   try {
-    await signOut(auth);
-    closeChat();
-    status("Sei uscito dall'account.");
+
+    await setDoc(doc(db, "users", currentUser.uid), {
+      uid: currentUser.uid,
+      displayName: name || currentUser.displayName || "Utente",
+      country,
+      city,
+      music,
+      movies
+    }, { merge: true });
+
+    document.getElementById("profileStatus").textContent =
+      "Profilo salvato correttamente!";
+
+    await loadUsers();
+
   } catch (error) {
-    status(error.message);
+
+    document.getElementById("profileStatus").textContent =
+      "Errore: " + error.message;
+
   }
 }
 
-onAuthStateChanged(auth, async user => {
+
+/* CONTROLLO ACCESSO */
+
+onAuthStateChanged(auth, async (user) => {
+
   currentUser = user;
 
   if (user) {
-    $("welcome").classList.add("hidden");
-    $("auth").classList.add("hidden");
-    $("dashboard").classList.remove("hidden");
-
-    $("welcomeUser").textContent =
-      "Benvenuto, " + (user.displayName || user.email);
 
     try {
-      await saveUser(user);
-      loadUsers();
+
+      await createProfile(user, user.displayName || "");
+
+      showDashboard();
+
+      document.getElementById("profileInfo").textContent =
+        "Account: " + user.email;
+
+      const snapshot = await getDocs(
+        collection(db, "users")
+      );
+
+      const mine = snapshot.docs.find(
+        item => item.id === user.uid
+      );
+
+      if (mine) {
+
+        const data = mine.data();
+
+        document.getElementById("profileName").value =
+          data.displayName || "";
+
+        document.getElementById("country").value =
+          data.country || "";
+
+        document.getElementById("city").value =
+          data.city || "";
+
+        document.getElementById("music").value =
+          data.music || "";
+
+        document.getElementById("movies").value =
+          data.movies || "";
+
+      }
+
+      await loadUsers();
+
     } catch (error) {
-      status("Errore nel caricamento: " + error.message);
+
+      document.getElementById("usersStatus").textContent =
+        "Errore Firebase: " + error.message;
+
     }
 
   } else {
-    $("dashboard").classList.add("hidden");
-    $("welcome").classList.remove("hidden");
+
+    dashboard.classList.add("hidden");
+    welcome.classList.remove("hidden");
+
   }
+
 });
 
-function loadUsers() {
-  if (unsubscribeUsers) unsubscribeUsers();
 
-  unsubscribeUsers = onSnapshot(
-    collection(db, "users"),
-    snapshot => {
-      const list = $("usersList");
-      list.innerHTML = "";
+/* CALCOLO AFFINITA */
 
-      let count = 0;
+function calculateAffinity(a, b) {
 
-      snapshot.forEach(item => {
-        const person = item.data();
+  function normalize(value) {
+    return value.toLowerCase()
+      .split(",")
+      .map(item => item.trim())
+      .filter(Boolean);
+  }
 
-        if (person.uid === currentUser.uid) return;
+  function similarity(first, second) {
 
-        count++;
+    const one = normalize(first);
+    const two = normalize(second);
 
-        const div = document.createElement("div");
-        div.className = "user";
-
-        const title = document.createElement("strong");
-        title.textContent = person.name || "Utente";
-
-        const button = document.createElement("button");
-        button.textContent = "Apri chat";
-        button.onclick = () => openChat(person);
-
-        div.append(title, document.createElement("br"), button);
-        list.appendChild(div);
-      });
-
-      if (count === 0) {
-        list.textContent =
-          "Non ci sono ancora altri utenti registrati.";
-      }
-    },
-    error => status("Errore utenti: " + error.message)
-  );
-}
-
-function makeChatId(uid1, uid2) {
-  return [uid1, uid2].sort().join("_");
-}
-
-async function openChat(person) {
-  activeChatId = makeChatId(currentUser.uid, person.uid);
-
-  $("chatCard").classList.remove("hidden");
-  $("chatTitle").textContent = "Chat con " + person.name;
-  $("messages").innerHTML = "Caricamento messaggi...";
-
-  try {
-    const chatRef = doc(db, "chats", activeChatId);
-    const chatSnap = await getDoc(chatRef);
-
-    if (!chatSnap.exists()) {
-      await setDoc(chatRef, {
-        participants: [currentUser.uid, person.uid],
-        createdAt: serverTimestamp()
-      });
+    if (one.length === 0 && two.length === 0) {
+      return null;
     }
 
-    if (unsubscribeMessages) unsubscribeMessages();
+    if (one.length === 0 || two.length === 0) {
+      return 0;
+    }
 
-    const messagesQuery = query(
-      collection(db, "chats", activeChatId, "messages"),
-      orderBy("createdAt", "asc")
-    );
+    const matches = one.filter(item => two.includes(item));
 
-    unsubscribeMessages = onSnapshot(
-      messagesQuery,
-      snapshot => {
-        const box = $("messages");
-        box.innerHTML = "";
+    const total = new Set([...one, ...two]).size;
 
-        snapshot.forEach(item => {
-          const msg = item.data();
-          const div = document.createElement("div");
+    return Math.round(matches.length / total * 100);
+  }
 
-          div.className = "message" +
-            (msg.senderId === currentUser.uid ? " mine" : "");
+  const musicScore = similarity(a.music || "", b.music || "");
+  const movieScore = similarity(a.movies || "", b.movies || "");
 
-          div.textContent =
-            (msg.senderId === currentUser.uid ? "Tu: " : person.name + ": ")
-            + (msg.text || "");
+  const scores = [musicScore, movieScore]
+    .filter(score => score !== null);
 
-          box.appendChild(div);
-        });
+  if (scores.length === 0) return 0;
 
-        box.scrollTop = box.scrollHeight;
-      },
-      error => status("Errore chat: " + error.message)
-    );
+  return Math.round(
+    scores.reduce((sum, score) => sum + score, 0) / scores.length
+  );
+
+}
+
+
+/* CARICAMENTO PERSONE */
+
+async function loadUsers() {
+
+  if (!currentUser) return;
+
+  const list = document.getElementById("usersList");
+  const status = document.getElementById("usersStatus");
+
+  list.innerHTML = "Ricerca persone...";
+  status.textContent = "";
+
+  try {
+
+    const snapshot = await getDocs(collection(db, "users"));
+
+    const searchCountry =
+      document.getElementById("searchCountry").value.trim().toLowerCase();
+
+    const searchCity =
+      document.getElementById("searchCity").value.trim().toLowerCase();
+
+    const myData = snapshot.docs.find(
+      item => item.id === currentUser.uid
+    )?.data() || {};
+
+    const people = [];
+
+    snapshot.forEach((userDoc) => {
+
+      if (userDoc.id === currentUser.uid) return;
+
+      const person = userDoc.data();
+
+      if (searchCountry &&
+          !(person.country || "").toLowerCase().includes(searchCountry)) {
+        return;
+      }
+
+      if (searchCity &&
+          !(person.city || "").toLowerCase().includes(searchCity)) {
+        return;
+      }
+
+      people.push({
+        uid: userDoc.id,
+        data: person,
+        affinity: calculateAffinity(myData, person)
+      });
+
+    });
+
+    people.sort((a, b) => b.affinity - a.affinity);
+
+    list.innerHTML = "";
+
+    if (people.length === 0) {
+      list.textContent =
+        "Nessuna persona trovata. Prova un'altra città o nazione.";
+      return;
+    }
+
+    people.forEach(person => {
+
+      const box = document.createElement("div");
+      box.className = "person";
+
+      const title = document.createElement("h3");
+      title.textContent =
+        "👤 " + (person.data.displayName || "Utente Social Mirror");
+
+      const location = document.createElement("p");
+      location.textContent =
+        "📍 " +
+        (person.data.city || "Città non indicata") +
+        ", " +
+        (person.data.country || "Nazione non indicata");
+
+      const affinity = document.createElement("p");
+      affinity.className = "affinity";
+      affinity.textContent =
+        "❤️ Affinità: " + person.affinity + "%";
+
+      const music = document.createElement("p");
+      music.textContent =
+        "🎵 Musica: " + (person.data.music || "Non indicata");
+
+      const movies = document.createElement("p");
+      movies.textContent =
+        "🎬 Film e serie: " + (person.data.movies || "Non indicati");
+
+      const button = document.createElement("button");
+      button.textContent = "Inizia una chat";
+
+      button.addEventListener("click", () => {
+        openChat(person.uid, person.data.displayName || "Utente");
+      });
+
+      box.append(title, location, affinity, music, movies, button);
+
+      list.appendChild(box);
+
+    });
 
   } catch (error) {
-    status("Errore apertura chat: " + error.message);
+
+    list.textContent = "Impossibile caricare le persone.";
+    status.textContent = error.message;
+
   }
+
 }
+
+
+/* CANCELLA FILTRI */
+
+function clearSearch() {
+
+  document.getElementById("searchCountry").value = "";
+  document.getElementById("searchCity").value = "";
+
+  loadUsers();
+
+}
+
+
+/* APERTURA CHAT */
+
+async function openChat(otherUid, otherName) {
+
+  if (!currentUser) return;
+
+  try {
+
+    const participants = [
+      currentUser.uid,
+      otherUid
+    ].sort();
+
+    currentChatId = participants.join("_");
+
+    await setDoc(doc(db, "chats", currentChatId), {
+      participants,
+      createdAt: serverTimestamp()
+    }, { merge: true });
+
+    document.getElementById("chatTitle").textContent =
+      "Chat con " + otherName;
+
+    document.getElementById("chatCard").classList.remove("hidden");
+
+    loadMessages();
+
+  } catch (error) {
+
+    document.getElementById("chatStatus").textContent =
+      "Errore chat: " + error.message;
+
+  }
+
+}
+
+
+/* MESSAGGI */
+
+function loadMessages() {
+
+  if (unsubscribeMessages) {
+    unsubscribeMessages();
+  }
+
+  const box = document.getElementById("messages");
+
+  box.innerHTML = "";
+
+  const messagesQuery = query(
+    collection(db, "chats", currentChatId, "messages"),
+    orderBy("createdAt")
+  );
+
+  unsubscribeMessages = onSnapshot(
+    messagesQuery,
+    (snapshot) => {
+
+      box.innerHTML = "";
+
+      snapshot.forEach((messageDoc) => {
+
+        const data = messageDoc.data();
+
+        const message = document.createElement("div");
+        message.className = "message";
+
+        if (data.senderId === currentUser.uid) {
+          message.classList.add("my-message");
+        }
+
+        message.textContent =
+          (data.senderId === currentUser.uid ? "Tu: " : "Utente: ") +
+          data.text;
+
+        box.appendChild(message);
+
+      });
+
+      box.scrollTop = box.scrollHeight;
+
+    },
+    (error) => {
+
+      document.getElementById("chatStatus").textContent =
+        "Errore messaggi: " + error.message;
+
+    }
+  );
+
+}
+
+
+/* INVIO MESSAGGI */
 
 async function sendMessage() {
-  const text = $("messageInput").value.trim();
 
-  if (!text || !activeChatId) return;
+  const input = document.getElementById("messageInput");
+  const text = input.value.trim();
+
+  if (!text || !currentChatId || !currentUser) return;
 
   try {
+
     await addDoc(
-      collection(db, "chats", activeChatId, "messages"),
+      collection(db, "chats", currentChatId, "messages"),
       {
         senderId: currentUser.uid,
-        text: text,
-        type: "message",
+        text,
         createdAt: serverTimestamp()
       }
     );
 
-    $("messageInput").value = "";
+    input.value = "";
 
   } catch (error) {
-    status("Errore invio: " + error.message);
+
+    document.getElementById("chatStatus").textContent =
+      error.message;
+
   }
+
 }
+
+
+/* REGALI */
 
 async function sendGift(gift) {
-  if (!activeChatId) return;
+
+  if (!currentChatId) {
+    alert("Prima apri una chat.");
+    return;
+  }
 
   try {
+
     await addDoc(
-      collection(db, "chats", activeChatId, "messages"),
+      collection(db, "chats", currentChatId, "messages"),
       {
         senderId: currentUser.uid,
-        text: "Ti ha inviato un regalo: " + gift,
-        type: "gift",
+        text: "🎁 Regalo virtuale: " + gift,
         createdAt: serverTimestamp()
       }
     );
 
-    status("Regalo virtuale inviato!");
+    alert("Regalo virtuale inviato!");
 
   } catch (error) {
-    status("Errore regalo: " + error.message);
+
+    alert("Errore: " + error.message);
+
   }
+
 }
 
+
+/* CHIUSURA CHAT */
+
 function closeChat() {
+
   if (unsubscribeMessages) {
     unsubscribeMessages();
     unsubscribeMessages = null;
   }
 
-  activeChatId = null;
-  $("chatCard").classList.add("hidden");
+  currentChatId = null;
+
+  document.getElementById("chatCard").classList.add("hidden");
+  document.getElementById("messages").innerHTML = "";
+
 }
 
-function vipInfo() {
-  alert("Social Mirror VIP: funzionalità esclusive in arrivo!");
+
+/* USCITA */
+
+async function logout() {
+
+  closeChat();
+  await signOut(auth);
+
 }
+
+
+/* VIP */
+
+function vipInfo() {
+
+  alert(
+    "Social Mirror VIP: nuove funzionalità premium in arrivo!"
+  );
+
+}
+
+
+/* FUNZIONI DEI PULSANTI */
 
 Object.assign(window, {
   showAuth,
+  showWelcome,
   register,
   login,
   googleLogin,
-  logout,
+  saveProfile,
+  loadUsers,
+  clearSearch,
   openChat,
   sendMessage,
   sendGift,
   closeChat,
+  logout,
   vipInfo
 });
 
