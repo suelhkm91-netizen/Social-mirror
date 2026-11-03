@@ -1,305 +1,217 @@
 <!DOCTYPE html>
 <html lang="it">
-<link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#1769aa"><head>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#e9e5d8">
 <title>Social Mirror</title>
+
 <style>
+:root {
+  --cream: #f5f1e7;
+  --sage: #9caf98;
+  --forest: #385343;
+  --gold: #c6a45b;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f3f7fc;
-  color: #17365d;
+  background: var(--cream);
+  color: var(--forest);
 }
+
 header {
-  background: #1769aa;
+  background: var(--forest);
   color: white;
-  padding: 25px;
   text-align: center;
+  padding: 22px;
 }
+
+header h1 {
+  margin: 0;
+  font-size: 27px;
+  letter-spacing: 2px;
+}
+
+header p {
+  margin-bottom: 0;
+  color: #e5d5a8;
+}
+
 main {
-  padding: 25px;
-  text-align: center;
+  max-width: 650px;
+  margin: auto;
+  padding: 18px;
 }
+
 .card {
   background: white;
-  padding: 25px;
   border-radius: 18px;
-  box-shadow: 0 3px 12px #ccd8e5;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px #0000000d;
 }
-button {
-  background: #1769aa;
-  color: white;
-  border: 0;
-  padding: 14px 25px;
+
+h2 {
+  color: var(--forest);
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  margin: 7px 0;
+  border: 1px solid #d8dfd4;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 15px;
 }
+
+button {
+  background: var(--sage);
+  color: white;
+  border: none;
+  padding: 13px 18px;
+  border-radius: 10px;
+  margin: 5px 3px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--forest);
+}
+
+.gold {
+  background: var(--gold);
+  color: #273b2e;
+}
+
+.secondary {
+  background: #e9e5d8;
+  color: var(--forest);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.user {
+  padding: 12px;
+  margin: 7px 0;
+  background: var(--cream);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.user:hover {
+  background: #e1e8dc;
+}
+
+#messages {
+  height: 250px;
+  overflow-y: auto;
+  background: var(--cream);
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.message {
+  background: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 7px 0;
+  overflow-wrap: anywhere;
+}
+
+.mine {
+  background: #dce8d9;
+}
+
+#status {
+  font-size: 14px;
+  color: var(--forest);
+  margin: 10px 0;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-size: 12px;
+}
+
 </style>
 </head>
+
 <body>
+
 <header>
-<h1>Social Mirror</h1>
-<p>La tua identità digitale</p>
+  <h1>🌿 SOCIAL MIRROR</h1>
+  <p>Incontra. Condividi. Comunica.</p>
 </header>
+
 <main>
-<div class="card">
-<h2>Benvenuto!su social mirror.</p>
-<button onclick="document.getElementById('registrazione').style.display='block'">
-  Inizia
-</button>
 
-<div<div id="registrazione" style="display:none; padding:20px;">
-  <h2>Crea il tuo profilo</h2>
-  <p>Inizia il tuo nuovo spazio social!</p>
-
-  <input
-    type="text"
-    id="smName"
-    placeholder="Il tuo nome"
-    required
-  >
-
-  <input
-    type="email"
-    id="smEmail"
-    placeholder="La tua email"
-    required
-  >
-
-  <input
-    type="password"
-    id="smPassword"
-    placeholder="Crea una password"
-    required
-  >
-
-  <button type="button" id="smRegister">
-    Crea account
-  </button>
-
-  <button type="button" id="smGoogle">
-    Continua con Google
-  </button>
-
-  <p id="authStatus"></p>
-</div>
-</div>
-</main>
-<script>
-
-</script>
-  
-<style>
-#myMirror {
-  background: white;
-  color: #183b65;
-  border: 1px solid #d7e5f5;
-  border-radius: 16px;
-  padding: 18px;
-  margin: 20px 0;
-  font-family: Arial, sans-serif;
-}
-#myMirror input, #myMirror select {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 12px;
-  margin: 8px 0 16px;
-  border: 1px solid #cbd8e8;
-  border-radius: 9px;
-}
-#myMirror button {
-  padding: 12px;
-  border: 0;
-  border-radius: 9px;
-  background: #1769c2;
-  color: white;
-  margin: 5px 3px;
-}
-#myMirror .avatar {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  background: #dcecff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  font-size: 22px;
-}
-#myMirror .avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-</style>
-
-<section id="myMirror">
-  <h2>MY MIRROR</h2>
-  <p>Personalizza un contatto. Solo tu vedrai le modifiche.</p>
-
-  <div class="avatar">
-    <span id="smInitials">EL</span>
-    <img id="smPhotoPreview" alt="Foto personalizzata" hidden>
-  </div>
-
-  <p>Contatto originale: <strong>Elena</strong></p>
-  <p>Nome che vedrai tu:</p>
-  <input id="smAlias" placeholder="Es. Alessandro">
-
-  <label>La tua foto personalizzata</label>
-  <input id="smPhoto" type="file" accept="image/*">
-
-  <label>Dove vuoi applicare la personalizzazione?</label>
-  <select id="smScope">
-    <option value="chat">Solo nella chat</option>
-    <option value="nearby">Nelle persone vicine</option>
-    <option value="both">In entrambe</option>
-  </select>
-
-  <button type="button" id="smSave">Salva modifiche</button>
-  <button type="button" id="smReset">Ripristina originale</button>
-
-  <p id="smStatus" aria-live="polite"></p>
+<section id="welcome" class="card">
+  <h2>Benvenuto su Social Mirror</h2>
+  <p>Uno spazio per conoscere nuove persone e comunicare in privato.</p>
+  <button onclick="showAuth()">Entra</button>
 </section>
 
-<script>
-(function () {
-  const key = "socialMirrorPrivateElena";
-  const alias = document.getElementById("smAlias");
-  const photoInput = document.getElementById("smPhoto");
-  const scope = document.getElementById("smScope");
-  const preview = document.getElementById("smPhotoPreview");
-  const initials = document.getElementById("smInitials");
-  const status = document.getElementById("smStatus");
+<section id="auth" class="card hidden">
+  <h2>Il tuo account</h2>
 
-  let saved = {};
-  let newPhoto = null;
+  <input id="name" placeholder="Il tuo nome">
+  <input id="email" type="email" placeholder="La tua email">
+  <input id="password" type="password" placeholder="Password">
 
-  try {
-    saved = JSON.parse(localStorage.getItem(key)) || {};
-  } catch (e) {
-    saved = {};
-  }
+  <button onclick="register()">Crea account</button>
+  <button onclick="login()">Accedi</button>
+  <button class="gold" onclick="googleLogin()">
+    Continua con Google
+  </button>
+</section>
 
-  function show() {
-    alias.value = saved.alias || "";
-    scope.value = saved.scope || "chat";
+<section id="dashboard" class="hidden">
 
-    initials.textContent =
-      (saved.alias || "Elena").substring(0, 2).toUpperCase();
+  <div class="card">
+    <h2>Il mio profilo</h2>
+    <p id="welcomeUser"></p>
+    <button class="secondary" onclick="logout()">Esci</button>
+  </div>
 
-    if (saved.photo) {
-      preview.src = saved.photo;
-      preview.hidden = false;
-      initials.hidden = true;
-    } else {
-      preview.hidden = true;
-      initials.hidden = false;
-    }
-  }
+  <div class="card">
+    <h2>💬 Persone su Social Mirror</h2>
+    <p>Scegli una persona per iniziare una chat privata.</p>
+    <div id="usersList">Caricamento utenti...</div>
+  </div>
 
-  photoInput.addEventListener("change", function () {
-    const file = photoInput.files[0];
-    if (!file) return;
+  <div class="card hidden" id="chatCard">
+    <h2 id="chatTitle">Chat privata</h2>
 
-    if (file.size > 1500000) {
-      status.textContent = "Scegli una foto più piccola di 1,5 MB.";
-      photoInput.value = "";
-      return;
-    }
+    <div id="messages"></div>
 
-    const reader = new FileReader();
-    reader.onload = function () {
-      newPhoto = reader.result;
-      preview.src = newPhoto;
-      preview.hidden = false;
-      initials.hidden = true;
-    };
-    reader.readAsDataURL(file);
-  });
+    <input id="messageInput"
+           placeholder="Scrivi un messaggio...">
 
-  document.getElementById("smSave").addEventListener("click", function () {
-    const name = alias.value.trim();
+    <button onclick="sendMessage()">Invia</button>
+    <button class="secondary" onclick="closeChat()">Chiudi chat</button>
 
-    if (!name) {
-      status.textContent = "Inserisci un nome personalizzato.";
-      return;
-    }
+    <hr>
 
-    const updated = {
-      alias: name,
-      scope: scope.value,
-      photo: newPhoto || saved.photo || ""
-    };
+    <h3>🎁 Regala qualcosa</h3>
 
-    try {
-      localStorage.setItem(key, JSON.stringify(updated));
-      saved = updated;
-      show();
-      status.textContent = "Personalizzazione salvata sul tuo dispositivo!";
-    } catch (e) {
-      status.textContent = "Spazio di memoria insufficiente. Prova con una foto più piccola.";
-    }
-  });
+    <button class="gold" onclick="sendGift('🌹 Rosa')">🌹 Rosa</button>
+    <button class="gold" onclick="sendGift('❤️ Cuore')">❤️ Cuore</button>
+    <button class="gold" onclick="sendGift('💎 Diamante')">💎 Diamante</button>
+    <button class="gold" onclick="sendGift('💍 Gioiello')">💍 Gioiello</button>
+  </div>
 
-  document.getElementById("smReset").addEventListener("click", function () {
-    localStorage.removeItem(key);
-    saved = {};
-    newPhoto = null;
-    photoInput.value = "";
-    show();
-    status.textContent = "Ripristinato il contatto originale Elena.";
-  });
-
-  show();
-})();
-</script> <script type="module">  
-  // Import the functions you need from the SDKs you need  
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";  
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";  
-  // TODO: Add SDKs for Firebase products that you want to use  
-  // https://firebase.google.com/docs/web/setup#available-libraries  
-  
-  // Your web app's Firebase configuration  
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional  
-  const firebaseConfig = {  
-    apiKey: "AIzaSyCJDgEfbZMOZE4tvkLNKG82EvOx7rIe3Ew",  
-    authDomain: "social-mirror-132f7.firebaseapp.com",  
-    projectId: "social-mirror-132f7",  
-    storageBucket: "social-mirror-132f7.firebasestorage.app",  
-    messagingSenderId: "1040357680311",  
-    appId: "1:1040357680311:web:379604b8b7364948275932",  
-    measurementId: "G-TT8XFM9H77"  
-  };  
-  
-  // Initialize Firebase  
-  const app = initializeApp(firebaseConfig);  
-  const analytics = getAnalytics(app);  
-</script>
-</body><!-- FIREBASE SOCIAL MIRROR -->
-
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "INSERISCI_LA_TUA_API_KEY",
-  authDomain: "INSERISCI_IL_TUO_AUTH_DOMAIN",
-  projectId: "INSERISCI_IL_TUO_PROJECT_ID",
-  storageBucket: "INSERISCI_IL_TUO_STORAGE_BUCKET",
-  messagingSenderId: "INSERISCI_IL_TUO_MESSAGING_SENDER_ID",
-  appId: "INSERISCI_IL_TUO_APP_ID"
-};
-
-firebase.initializeApp(firebaseConfig);
-
-const auth = firebase.auth();
-const db = firebase.firestore();
-
-console.log("Social Mirror collegato a Firebase!");
-</script>
-</html>
+  <div class="card">
+    <h2>⭐
