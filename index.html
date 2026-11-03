@@ -256,6 +256,28 @@ button {
 
   show();
 })();
+</script> <script type="module">  
+  // Import the functions you need from the SDKs you need  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";  
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";  
+  // TODO: Add SDKs for Firebase products that you want to use  
+  // https://firebase.google.com/docs/web/setup#available-libraries  
+  
+  // Your web app's Firebase configuration  
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional  
+  const firebaseConfig = {  
+    apiKey: "AIzaSyCJDgEfbZMOZE4tvkLNKG82EvOx7rIe3Ew",  
+    authDomain: "social-mirror-132f7.firebaseapp.com",  
+    projectId: "social-mirror-132f7",  
+    storageBucket: "social-mirror-132f7.firebasestorage.app",  
+    messagingSenderId: "1040357680311",  
+    appId: "1:1040357680311:web:379604b8b7364948275932",  
+    measurementId: "G-TT8XFM9H77"  
+  };  
+  
+  // Initialize Firebase  
+  const app = initializeApp(firebaseConfig);  
+  const analytics = getAnalytics(app);  
 </script>
 </body><!-- FIREBASE SOCIAL MIRROR -->
 
