@@ -257,5 +257,27 @@ button {
   show();
 })();
 </script>
-</body>
+</body><!-- FIREBASE SOCIAL MIRROR -->
+
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "INSERISCI_LA_TUA_API_KEY",
+  authDomain: "INSERISCI_IL_TUO_AUTH_DOMAIN",
+  projectId: "INSERISCI_IL_TUO_PROJECT_ID",
+  storageBucket: "INSERISCI_IL_TUO_STORAGE_BUCKET",
+  messagingSenderId: "INSERISCI_IL_TUO_MESSAGING_SENDER_ID",
+  appId: "INSERISCI_IL_TUO_APP_ID"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+console.log("Social Mirror collegato a Firebase!");
+</script>
 </html>
